@@ -9,7 +9,7 @@
 ;       A pseudo random number generator
 ; 
 ;  License:
-;  
+;
 ;           Copyright (C) 2022 Frank Bjørnø
 ;
 ;          1. Permission is hereby granted, free of charge, to any person obtaining a copy 
@@ -38,8 +38,8 @@
 ;
 ;  Constants used in the linear congruential function Xn+1 = (aXn + c) mod m
 ;
-__a			equ	047068445h						;  (.01m < a < .99m, a % 8 = 5)
-__c            equ  01016b5h                                ;  3*7*23*37*59 (must have no factors in common with m, and should be odd)
+__a      equ  047068445h				;  (.01m < a < .99m, a % 8 = 5)
+__c      equ  01016b5h                                	;  3*7*23*37*59 (must have no factors in common with m, and should be odd)
 
 ;
 ;  Make the following functions visible to the linker
@@ -51,9 +51,9 @@ public randomize, rndmax, set_seed, rnd, rndflt, rndint, rndbin
 ;  This is the data segment where variables are declared and initialized
 ;
 .data
-__m			dd	07fffffffh						;  This is a prime number (2^31 - 1). Can't be immediate value in proc rndflt.
-                                                            ;  Also notice that A MOD 2^n = A AND (2^n - 1).
-__seed		dd	013b3eh							;  Initial seed.
+__m			dd	07fffffffh		;  This is a prime number (2^31 - 1). Can't be immediate value in proc rndflt.
+                                                        ;  Also notice that A MOD 2^n = A AND (2^n - 1).
+__seed		dd	013b3eh				;  Initial seed.
 
 
 ;
@@ -72,10 +72,10 @@ __seed		dd	013b3eh							;  Initial seed.
 ;  C function: unsigned int randomize(void);                                                                               ;
 ;--------------------------------------------------------------------------------------------------------------------------;
 randomize			proc
-		rdtsc									;  Read Time-Stamp Counter into EDX:EAX. High order 32 bits are loaded into EDX, Low order into EAX
-		and		eax, __m							;  mask the most significant bit
-		mov		__seed, eax						;  set the seed to a relatively random number, (lsb is somewhat random)		
-		ret
+	rdtsc						;  Read Time-Stamp Counter into EDX:EAX. High order 32 bits are loaded into EDX, Low order into EAX
+	and		eax, __m			;  mask the most significant bit
+	mov		__seed, eax			;  set the seed to a relatively random number, (lsb is somewhat random)		
+	ret
 randomize			endp
 
 
@@ -89,8 +89,8 @@ randomize			endp
 ;  C function: unsigned int rndmax(void);                                                                                  ;
 ;--------------------------------------------------------------------------------------------------------------------------;
 rndmax			proc
-		mov		EAX, __m
-		ret
+	mov		EAX, __m
+	ret
 rndmax			endp
 
 
@@ -109,9 +109,9 @@ rndmax			endp
 ;              and use the set_seed procedure to set the initial seed.                                                     ;
 ;--------------------------------------------------------------------------------------------------------------------------;
 set_seed			proc
-		mov		eax, dword ptr[esp + 4]				;  get the seed passed on the stack
-		mov		__seed, eax						;  set the seed
-		ret
+	mov		eax, dword ptr[esp + 4]		;  get the seed passed on the stack
+	mov		__seed, eax			;  set the seed
+	ret
 set_seed			endp
 
 
@@ -127,8 +127,8 @@ set_seed			endp
 ;  C function: unsigned int rnd(void);
 ;--------------------------------------------------------------------------------------------------------------------------;
 rnd       		proc
-		call      __generate                        
-		ret
+	call      __generate                        
+	ret
 rnd                 endp
 
 
@@ -142,12 +142,12 @@ rnd                 endp
 ;  C function: double rndflt(void);                                                                                        ;
 ;--------------------------------------------------------------------------------------------------------------------------;
 rndflt			proc
-		call 	__generate						;  generate a random number on interval [0, __m]
-		push	eax									;  push on stack
-		fild	dword ptr[esp]							;  load integer from stack on st(0)
-		fidiv	__m								;  divide seed by the value of m to get a number in the interval [0, 1]
-		add		esp, 4							;  "pop" the stack, that is, add 4 bytes to esp
-		ret										;  return control to caller
+	call 	__generate				;  generate a random number on interval [0, __m]
+	push	eax					;  push on stack
+	fild	dword ptr[esp]				;  load integer from stack on st(0)
+	fidiv	__m					;  divide seed by the value of m to get a number in the interval [0, 1]
+	add		esp, 4				;  "pop" the stack, that is, add 4 bytes to esp
+	ret						;  return control to caller
 rndflt			endp
 
 
@@ -163,22 +163,22 @@ rndflt			endp
 ;  Note:       No error checking of any kind will be performed. If input conditions are not met, behaviour is undefined.   ;
 ;--------------------------------------------------------------------------------------------------------------------------;
 rndint       proc
-	call    __generate								;  call __generate. __seed now in EAX
-	push    ebx									;  save EBX on stack
+	call    __generate				;  call __generate. __seed now in EAX
+	push    ebx					;  save EBX on stack
 
 ;  calculate interval width in ebx	
-	mov     ebx, dword ptr[esp + 12]					;  load high limit into EBX
-	sub     ebx, dword ptr[esp + 8]					;  subtract low limit from EBX
-	inc     ebx									;  add 1
+	mov     ebx, dword ptr[esp + 12]		;  load high limit into EBX
+	sub     ebx, dword ptr[esp + 8]			;  subtract low limit from EBX
+	inc     ebx					;  add 1
 	
 ;  scale number
 	xor     edx, edx
-	div     ebx									;  divide __seed by interval width. remainder in EDX
-	add     edx, dword ptr[esp + 8]					;  add low limit to remainder	
+	div     ebx					;  divide __seed by interval width. remainder in EDX
+	add     edx, dword ptr[esp + 8]			;  add low limit to remainder	
 	
-	mov     eax, edx								;  copy remainder into EAX
-	pop     ebx									;  load EBX
-	ret											;  return control to caller
+	mov     eax, edx				;  copy remainder into EAX
+	pop     ebx					;  load EBX
+	ret						;  return control to caller
 rndint       endp
 
 
@@ -197,9 +197,9 @@ rndint       endp
 ;              acts fairly random by isolating and returning this bit.                                                     ;
 ;--------------------------------------------------------------------------------------------------------------------------;
 rndbin       proc	 
-	call    __generate								;  generate a random number in interval [0, __m]	
-	and       eax, 1								;  isolate lsb	
-	ret											;  return control to caller	
+	call    __generate				;  generate a random number in interval [0, __m]	
+	and       eax, 1				;  isolate lsb	
+	ret						;  return control to caller	
 rndbin       endp
 
 
@@ -214,34 +214,34 @@ rndbin       endp
 ;--------------------------------------------------------------------------------------------------------------------------;
 __generate		proc
   ; prepare registers
-		push	ebx							;  save EBX on stack in accordance with the C calling convention.
-		xor	edx, edx						;  reset EDX so it won't interfere with multiplication
-		mov	eax, __a						;  copy a into EAX
-		mov	ebx, __seed					;  copy seed, Xn, into EBX
+	push	ebx					;  save EBX on stack in accordance with the C calling convention.
+	xor	edx, edx				;  reset EDX so it won't interfere with multiplication
+	mov	eax, __a				;  copy a into EAX
+	mov	ebx, __seed				;  copy seed, Xn, into EBX
 
   ; calculate
-		mul	   ebx						;  this is the multiplication aXn
-		mov	   edx, __c					;  copy c into EDX
-		add	   eax, edx					;  this is the addition aXn + c
-		and	   eax, __m					;  this is the modulus operation (aXn + c) mod m
+	mul	   ebx					;  this is the multiplication aXn
+	mov	   edx, __c				;  copy c into EDX
+	add	   eax, edx				;  this is the addition aXn + c
+	and	   eax, __m				;  this is the modulus operation (aXn + c) mod m
 		
   ; save seed
-		mov	__seed, eax					;  set seed Xn+1 = (aXn + c) mod m										
+	mov	__seed, eax				;  set seed Xn+1 = (aXn + c) mod m										
   
   ; hash
-		mov	   ecx, 4						;  shift 4 bits
-		xor	   edx, edx					;  reset edx
+	mov	   ecx, 4				;  shift 4 bits
+	xor	   edx, edx				;  reset edx
 @@rotate:
-		rcl	   eax, 1						;  shift lsb into msb and rotate msb into edx
-		rcr	    dl, 1
-		loop	        @@rotate		
-		shr	    dl, 4
-		or	    al, dl					;  copy msb into ax
-		shr	   eax, 1						;  shift one bit
+	rcl	   eax, 1				;  shift lsb into msb and rotate msb into edx
+	rcr	    dl, 1
+	loop	        @@rotate		
+	shr	    dl, 4
+	or	    al, dl				;  copy msb into ax
+	shr	   eax, 1				;  shift one bit
 		
   ; clean up and return		
-		pop		ebx						;  restore EBX
-		ret
+	pop		ebx				;  restore EBX
+	ret
 __generate		endp
 
 end
