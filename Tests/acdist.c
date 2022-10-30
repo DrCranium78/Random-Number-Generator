@@ -39,10 +39,6 @@
  *          OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/*
- *     generate 5000 correlations, lag 1 end export to data file to confirm that
- *     it is normally distributed with mean = 0.0 and std = 1.0
- */
  
 #include <stdio.h>
 #include <math.h>
