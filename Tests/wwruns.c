@@ -65,7 +65,7 @@ int main(void)
 	
 		//  declare and initialize variables used in the first step.
 	double   mean = (rndmax() / 2.0);
-	uint8_t  current = 2;										//  initialize to "impossible" value
+	uint8_t  current = 2;								//  initialize to "impossible" value
 	uint8_t  runs    = 0;
 	uint8_t  ones    = 0;
 	uint8_t  value;
@@ -74,12 +74,12 @@ int main(void)
 		//  If a number is higher than mean, count a 1.
 	for (int c = 0; c < SEQUENCE; c++)
 	{
-		value = (rnd() > mean);									//  get a 1 or a zero depending on the generated number
-		ones += value;											//  count ones
+		value = (rnd() > mean);							//  get a 1 or a zero depending on the generated number
+		ones += value;								//  count ones
 		
-		printf(" %c ", value ? '+' : '-');							//  print sequence
+		printf(" %c ", value ? '+' : '-');					//  print sequence
 		
-		if (value != current)									//  count runs
+		if (value != current)							//  count runs
 		{
 			runs++;
 			current = value;
@@ -87,18 +87,18 @@ int main(void)
 	}
 	
 		//  calculate expected runs and standard deviation
-	double    m = ones;											//  ones
-	double    n = SEQUENCE - ones;								//  zeros
-	double _2mn = 2.0 * m * n;									//  simplifies calculations
-	double   mn = m + n;										//  simplifies calculations					
+	double    m = ones;								//  ones
+	double    n = SEQUENCE - ones;							//  zeros
+	double _2mn = 2.0 * m * n;							//  simplifies calculations
+	double   mn = m + n;								//  simplifies calculations					
 	
-	double ER = (_2mn / (mn)) + 1;								//  Expected number of runs
+	double ER = (_2mn / (mn)) + 1;							//  Expected number of runs
 	double VR = (_2mn * (_2mn - mn)) / (mn * mn * (mn - 1));			//  Variance of runs
-	double S  = sqrt(VR);										//  Standard deviation
+	double S  = sqrt(VR);								//  Standard deviation
 	
 		//  compute area under the normal curve with mean ER and standard deviation S between -runs and runs
-	double D = fabs(runs - ER);									//  difference between observed runs and expected runs
-	double P = 1.0 - statistics_cmnorm_tt(ER - D, ER + D, ER, S);		//  p-value is area outside the observed number of runs
+	double D = fabs(runs - ER);							//  difference between observed runs and expected runs
+	double P = 1.0 - statistics_cmnorm_tt(ER - D, ER + D, ER, S);			//  p-value is area outside the observed number of runs
 	
 		//  present analysis
 	printf("\n\n\n    H0: The number of runs indicates randomness.\n");
