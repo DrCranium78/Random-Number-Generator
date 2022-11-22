@@ -61,8 +61,8 @@ clear closeresult fileID fmt sizeDATA
 
 %  --------     prepare data for the overlaying normal curve    --------
 
-x  = 0:0.1:16;							%  prepare data points from 0 to 16 on the x axis
-y  = normpdf(x, mean(DATA), std(DATA));		%  calculate corresponding data points on the y axis
+x  = 0:0.1:16;						%  prepare data points from 0 to 16 on the x axis
+y  = normpdf(x, mean(DATA), std(DATA));			%  calculate corresponding data points on the y axis
 SI = size(DATA);
 
 %  ----------------------     plot the graphs    -----------------------
