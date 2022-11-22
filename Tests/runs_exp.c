@@ -61,7 +61,7 @@
 uint8_t runs(uint16_t data)
 {
 	uint8_t bitvalue;
-	uint8_t current = 2;				//  initialize to "impossible" value.
+	uint8_t current = 2;					//  initialize to "impossible" value.
 	uint8_t runs    = 0;
 	
 	/*
