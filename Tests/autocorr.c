@@ -111,8 +111,8 @@ int main(void)
 	
 		//  analyze correlations
 	double serr;					//  standard error of the autocorrelation for the sample
-	double width;			     	//  width of confidence interval around autocorrelation coefficient
-	double p;						//  p-value = 1.0 - Probability of obtaining the correlation given population parameters	
+	double width;			     		//  width of confidence interval around autocorrelation coefficient
+	double p;					//  p-value = 1.0 - Probability of obtaining the correlation given population parameters	
 	   int lag;					
 	
 		//  print header
