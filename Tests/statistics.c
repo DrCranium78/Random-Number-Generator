@@ -277,12 +277,12 @@ static double _integral(double a, double b, unsigned int n, double (*func)(doubl
 {
 	if (b == a) return 0.0;						//  if b equals a, the integral is zero
 	
-	if (n < 2) n = 2;							//  make sure n >= 2
+	if (n < 2) n = 2;						//  make sure n >= 2
 	if (n % 2 != 0) n += 1;						//  ensure n is even
-	if (b < a) _swap(&a, &b);						//  ensure a < b
+	if (b < a) _swap(&a, &b);					//  ensure a < b
 	
-	double Sn = func(a) + func(b);				//  Sn is the sum of n sub-intervals
-	const double dx = (b - a) / n;				//  the length of the sub-intervals
+	double Sn = func(a) + func(b);					//  Sn is the sum of n sub-intervals
+	const double dx = (b - a) / n;					//  the length of the sub-intervals
 	unsigned short int m = 4;					//  multiplier alternates between 4 and 2
 	
 	for (int c = 0; c < n - 1; c++)
@@ -397,10 +397,10 @@ static double _igmfc(double t)
  */
 static double _igamma(double k, double x)
 {
-	_vara = k;		
+	_vara = k;
+	
 		//  resolution must be extremely high for this integral to
-		//  be accurate for large values of x
-		
+		//  be accurate for large values of x	
 	return _integral(0, x, 65536, _igmfc);	
 }
 
@@ -456,7 +456,7 @@ double statistics_cmchisq(double X, unsigned int df)
 		{	
 			/*
 			 *  In general, the cumulative chi squared function is the incomplete
-			 *  gamma function divided the gamma function
+			 *  gamma function divided by the gamma function
 			 */
 			A = _igamma(df / 2.0, X / 2.0);			
 			A /= tgamma(df / 2.0);
