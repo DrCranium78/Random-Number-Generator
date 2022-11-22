@@ -70,7 +70,7 @@ void init_string(Card *c)
 		case 1:  *string++ = 4; break;		//  diamond
 		case 2:  *string++ = 3; break;		//  hearts
 		case 3:  *string++ = 6; break;		//  spades
-		default: break;					//  impossible
+		default: break;				//  impossible
 	}
 	
 	switch(c -> _value)
@@ -138,7 +138,7 @@ Deck *new_deck()
  *
  *     \param *d     A pointer to the deck to be printed.
  *
- *     Note:    This function is never called in from the poker program.
+ *     Note:    This function is never called from the poker program.
  */ 
 void print_deck(Deck *d)
 {
