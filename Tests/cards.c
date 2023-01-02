@@ -70,7 +70,7 @@ static void init_string(Card *c)
 		case 1:  *string++ = 4; break;		//  diamond
 		case 2:  *string++ = 3; break;		//  hearts
 		case 3:  *string++ = 6; break;		//  spades
-		default: break;					//  impossible
+		default: break;				//  impossible
 	}
 	
 	switch(c -> _value)
@@ -359,7 +359,7 @@ int rate_hand(Hand *h)
 	int values[13] = {0}, i;
 	for (i = 0; i < h -> _size; i++) values[h -> _cards[i] -> _value - 2]++;
 	
-		//  look through the bins, count pairs, three and four of a kind
+		//  look through the bins. Count pairs, three and four of a kind
 	int pairs = 0, three = 0, four = 0;
 	for (i = 0; i < 13; i++)
 	{
@@ -402,7 +402,7 @@ int rate_hand(Hand *h)
 				break;
 			default: break;								//  impossible if properties != 0
 		}		
-				//  more than one of  a kind rules out straight and flush, so return early
+				//  more than one of a kind rules out straight and flush, so return early
 		return h -> _rating;
 	}
 	
