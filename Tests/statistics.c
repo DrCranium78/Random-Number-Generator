@@ -35,7 +35,7 @@
 
 #include "statistics.h" 
 
-#define _PI		      3.14159265359
+#define _PI               3.14159265359
 #define _RESOLUTION    1024
 
 /*
@@ -275,15 +275,15 @@ static void _swap(double *a, double *b)
  */
 static double _integral(double a, double b, unsigned n, double (*func)(double))
 {
-	if (b == a) return 0.0;						//  if b equals a, the integral is zero
+	if (b == a) return 0.0;					//  if b equals a, the integral is zero
 	
-	if (n < 2) n = 2;							//  make sure n >= 2
-	if (n % 2 != 0) n += 1;						//  ensure n is even
-	if (b < a) _swap(&a, &b);						//  ensure a < b
+	if (n < 2) n = 2;					//  make sure n >= 2
+	if (n % 2 != 0) n += 1;					//  ensure n is even
+	if (b < a) _swap(&a, &b);				//  ensure a < b
 	
 	double Sn = func(a) + func(b);				//  Sn is the sum of n sub-intervals
 	const double dx = (b - a) / n;				//  the length of the sub-intervals
-	unsigned short int m = 4;					//  multiplier alternates between 4 and 2
+	unsigned short int m = 4;				//  multiplier alternates between 4 and 2
 	
 	for (unsigned c = 0; c < n - 1; c++)
 	{
@@ -307,7 +307,7 @@ static double _integral(double a, double b, unsigned n, double (*func)(double))
  *			         _vara = mean
  *			         _varb = standard deviation
  *			         _varc = 1.0 / (std * sqrt(2 * _PI))
- *			    before calling this function.
+ *		   before calling this function.
  */
 static double _normal(double x)
 {		
@@ -456,7 +456,7 @@ double statistics_cmchisq(double X, unsigned df)
 		{	
 			/*
 			 *  In general, the cumulative chi squared function is the incomplete
-			 *  gamma function divided the gamma function
+			 *  gamma function divided by the gamma function
 			 */
 			A = _igamma(df / 2.0, X / 2.0);			
 			A /= tgamma(df / 2.0);
