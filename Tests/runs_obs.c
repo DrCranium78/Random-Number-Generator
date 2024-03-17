@@ -12,7 +12,7 @@
  *     From the command line with Microsoft (R) Macro Assembler and 
  *                                Microsoft (R) C/C++ Optimizing Compiler.
  * 
- *      1. Compile and link the program using the command
+ *      1. Compile and link the program using the commands
  *         ml /c rng.asm
  *         cl runs_obs.c rng.obj
  *
