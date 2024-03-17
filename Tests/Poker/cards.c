@@ -5,7 +5,7 @@
  *  Author: Frank Bjørnø
  *
  * Purpose: 
- *      Organize a deck of cards and poker hands
+ *      Organize a deck of cards and poker hands.
  *
  * License:
  * 
@@ -69,7 +69,7 @@ static void init_string(Card *c)
 		case 1:  *string++ = 4; break;		//  diamond
 		case 2:  *string++ = 3; break;		//  hearts
 		case 3:  *string++ = 6; break;		//  spades
-		default: break;					//  impossible
+		default: break;				//  impossible
 	}
 	
 	switch(c -> _value)
@@ -191,7 +191,7 @@ Card *deal_card(Deck *d)
 		//  if deck is empty, return NULL
 	if (d -> _size == 0) return NULL;
 	
-	int index = rndint(0, --(d -> _size));		//  select random card from the _cards list, and decrement deck size
+	int index = rndint(0, --(d -> _size));			//  select random card from the _cards list, and decrement deck size
 	Card *c = d -> _cards;					//  temporary card is first card in deck
 
 		//  if index is the first card in deck;
@@ -215,13 +215,13 @@ Card *deal_card(Deck *d)
 	if (index == d -> _size)
 	{
 		prev -> _next = NULL;
-		return c;							//  _next is already NULL
+		return c;					//  _next is already NULL
 	}
 	
 	prev -> _next = c -> _next;
 	
 done:	
-	c -> _next = NULL;						//  can't access the rest of the deck through this card
+	c -> _next = NULL;					//  can't access the rest of the deck through this card
 	return c;
 }
 
@@ -238,7 +238,7 @@ done:
  */
 int return_card(Deck *d, Card *c)
 {	
-		//  don't accept aa card in a full deck
+		//  don't accept a card in a full deck
 	if (d -> _size == 52) return 0;
 		
 	++(d -> _size);
@@ -430,7 +430,7 @@ static int rate_hand(Hand *h)
 			case 2:  pairs++; break;
 			case 3:  three++; break;
 			case 4:  four++;  break;
-			default:          break;			//  if 0 or 1, do nothing
+			default:          break;					//  if 0 or 1, do nothing
 		}
 	}
 	
@@ -462,7 +462,7 @@ static int rate_hand(Hand *h)
 				h -> _rating = 7;				
 				strcpy(h -> _description, "FOUR OF A KIND");
 				break;
-			default: break;								//  impossible if properties != 0
+			default: break;							//  impossible if properties != 0
 		}		
 				//  more than one of  a kind rules out straight and flush, so return early
 		return h -> _rating;
@@ -504,7 +504,7 @@ static int rate_hand(Hand *h)
 				h -> _rating = 8;				
 				strcpy(h -> _description, "STRAIGHT FLUSH");				
 				break;
-			case 0x70:									//  STRAIGHT | FLUSH | ROYAL
+			case 0x70:							//  STRAIGHT | FLUSH | ROYAL
 				h -> _rating = 9;				
 				strcpy(h -> _description, "ROYAL FLUSH");
 				break;			
@@ -527,7 +527,7 @@ static int rate_hand(Hand *h)
 void hand_to_string(Hand *h, char *str, int n)
 {
 	if (h -> _size == 0) return;	
-	*str = 0;												//  make sure buffer is empty before concatenating
+	*str = 0;									//  make sure buffer is empty before concatenating
 	
 	for (int i = 0; i < h -> _size; i++)
 	{
