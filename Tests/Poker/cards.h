@@ -38,14 +38,14 @@
  
 typedef struct card
 {
-	int  _rating;								//  0 - 51: 0 is the two of clubs and 51 is the ace of spades
-	int  _value;								//  2, 3, ...,10, j, Q, K, A
-	int  _suit;								//  0 = clubs, 1 = diamonds, 2 = hearts, 3 = spades
-	char _string[4];							//  _value and a symbol correpsonding to _suit
+	int  _rating;							//  0 - 51: 0 is the two of clubs and 51 is the ace of spades
+	int  _value;							//  2, 3, ...,10, j, Q, K, A
+	int  _suit;							//  0 = clubs, 1 = diamonds, 2 = hearts, 3 = spades
+	char _string[4];						//  _value and a symbol correpsonding to _suit
 	struct card *_next;	
 } Card;
 
-Card *new_card(unsigned int rating);				//  Returns a pointer to a new card 
+Card *new_card(unsigned int rating);					//  Returns a pointer to a new card 
 void  destroy_card(Card **c);						//  Free memory associated with this card
 
 
@@ -55,14 +55,14 @@ void  destroy_card(Card **c);						//  Free memory associated with this card
  */
 typedef struct
 {
-	Card *_cards;								//  This is the head of a linked list
-	int _size;								//  current number of cards in the deck
+	Card *_cards;							//  This is the head of a linked list
+	int _size;							//  current number of cards in the deck
 } Deck;
 
-Deck *new_deck();								//  Returns a pointer to a new deck
+Deck *new_deck();							//  Returns a pointer to a new deck
 void  destroy_deck(Deck **d);						//  Frees the memory associated with the deck
 Card *deal_card(Deck *d);						//  Returns a pointer to a card, removes the card from the deck
- int  return_card(Deck *d, Card *c);				//  Adds a card to the deck
+ int  return_card(Deck *d, Card *c);					//  Adds a card to the deck
 
 
 /*
@@ -70,14 +70,14 @@ Card *deal_card(Deck *d);						//  Returns a pointer to a card, removes the card
  */
 typedef struct
 {
-	Card *_cards[5];							//  A hand has max 5 cards
-	int   _size;								//  current number of cards in the hand
-	int   _rating;								//  0 - 9: 0 is high card, 9 is a royal flush
+	Card *_cards[5];						//  A hand has max 5 cards
+	int   _size;							//  current number of cards in the hand
+	int   _rating;							//  0 - 9: 0 is high card, 9 is a royal flush
 	char  _description[16];						//  "HIGH CARD", "ONE PAIR", etc
 } Hand;
 
-Hand *new_hand();								//  Returns to a new hand
+Hand *new_hand();							//  Returns to a new hand
 void  destroy_hand(Hand **h);						//  Frees memory associated with the hand. Hand must be empty
  int  add_card(Deck *d, Hand *h);					//  Add a card from a given deck to the hand
- int  drop_card(Deck *d, Hand *h, unsigned int i);	//  Drop a card and return it to a given deck 
-void  hand_to_string(Hand *h, char *buffer, int n);	//  Produces a text representation of the hand
+ int  drop_card(Deck *d, Hand *h, unsigned int i);			//  Drop a card and return it to a given deck 
+void  hand_to_string(Hand *h, char *buffer, int n);			//  Produces a text representation of the hand
