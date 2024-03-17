@@ -30,9 +30,11 @@
  */
  
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "cards.h"
+
 
 
 #define ONE_PAIR             0x01
@@ -42,6 +44,7 @@
 #define STRAIGHT             0x10
 #define FLUSH                0x20
 #define ROYAL                0x40
+
 
 
 	//  function defined in rng.asm
@@ -85,6 +88,7 @@ static void init_string(Card *c)
 }
 
 
+
 /*
  *     Creates a new card and returns a pointer to it
  *
@@ -104,6 +108,7 @@ Card *new_card(unsigned int rating)
 }
 
 
+
 /*
  *     Compares two cards. Used as argument passed to the qsort function when sorting a hand.
  */
@@ -113,18 +118,19 @@ static int cmp_card(const void *a, const void *b)
 }
 
 
+
 /*
  *    Frees the memory associates with this card and sets the pointer to NULL
  *
  *    \param **c     A pointer to the pointer that points to the card.
  */
- 
 void destroy_card(Card **c)
 {	
 	(*c) -> _next = NULL;
 	free(*c);
 	*c = NULL;	
 }
+
 
 
 /***************************************************************************************************
@@ -154,6 +160,7 @@ Deck *new_deck()
 }
 
 
+
 /*
  *     Frees the memory associated with the deck, and sets all pointer to NULL
  */
@@ -174,6 +181,8 @@ void destroy_deck(Deck **d)
 	free(*d);
 	*d = NULL;		
 }
+
+
 
 /*
  *     Deal a card from the deck
@@ -226,6 +235,7 @@ done:
 }
 
 
+
 /*
  *     Return a card to the deck
  *
@@ -275,7 +285,6 @@ int return_card(Deck *d, Card *c)
 
 
 
-
 /***************************************************************************************************
  *                                                                                                 *
  *                                             Hand                                                *
@@ -298,6 +307,7 @@ Hand *new_hand()
 }
 
 
+
 /*
  *     Frees memory associated with the h and
  *
@@ -310,6 +320,7 @@ void  destroy_hand(Hand **h)
 	free(*h);
 	*h = NULL;
 }
+
 
 
 /*
