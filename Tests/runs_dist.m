@@ -4,7 +4,7 @@
 %  Created: 30. May. 2022
 %   Author: Frank Bjørnø¸
 % 
-%  Purpose: To read and present data from a file prepared by running the program runsdistr.c
+%  Purpose: To read and present data from a file prepared by running the program runs_obs.c
 %           The objective is to demonstrate that runs are normally distributed.
 % 
 %  License:
