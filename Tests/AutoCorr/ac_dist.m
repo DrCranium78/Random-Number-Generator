@@ -2,7 +2,7 @@
 %  ac_dist.m
 % 
 %  Created: 13. Jun. 2022
-%   Author: Frank Bjørnø¸
+%   Author: Frank BjÃ¸rnÃ¸Â¸
 % 
 %  Purpose: To read and present data from a file prepared by running the program acdist.c
 %           The objective is to demonstrate that (unbiased) autocorrelations are normally distributed
@@ -11,7 +11,7 @@
 % 
 %  License:
 %  
-%           Copyright (C) 2022 Frank Bjørnø
+%           Copyright (C) 2022 Frank BjÃ¸rnÃ¸
 % 
 %           1. Permission is hereby granted, free of charge, to any person obtaining a copy 
 %           of this software and associated documentation files (the "Software"), to deal 
