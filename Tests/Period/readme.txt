@@ -1,0 +1,1 @@
+The program period.c computes the period length of the random number generator.
