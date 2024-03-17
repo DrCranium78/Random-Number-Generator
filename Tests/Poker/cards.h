@@ -32,10 +32,10 @@
 
 #pragma once
 
+
 /*
  *     Card
  */
- 
 typedef struct card
 {
 	int  _rating;							//  0 - 51: 0 is the two of clubs and 51 is the ace of spades
@@ -47,6 +47,7 @@ typedef struct card
 
 Card *new_card(unsigned int rating);					//  Returns a pointer to a new card 
 void  destroy_card(Card **c);						//  Free memory associated with this card
+
 
 
 /*
@@ -63,6 +64,7 @@ Deck *new_deck();							//  Returns a pointer to a new deck
 void  destroy_deck(Deck **d);						//  Frees the memory associated with the deck
 Card *deal_card(Deck *d);						//  Returns a pointer to a card, removes the card from the deck
  int  return_card(Deck *d, Card *c);					//  Adds a card to the deck
+
 
 
 /*
